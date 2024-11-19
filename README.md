@@ -186,7 +186,6 @@ $R(A,B,C,G,H), FD = \lbrace A \rightarrow H, GC \rightarrow A \rbrace$
 
 $$
 \begin{align}
-
 (BCG)^+ &= (BCG)^+ \\
         &= (BCGA)^+ \\
         &= (BCGAH)^+ \\
@@ -199,7 +198,6 @@ $$
        &= (CGA)^+ \\
        &= (CGAH)^+ \\
        &\not=(ABCGH)
-
 \end{align}
 $$
 
