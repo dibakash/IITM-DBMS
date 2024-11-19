@@ -420,6 +420,19 @@ A Player table will contain one row per Player,and in it we can include as colum
 
 For both tables, we can say that there are no part-key dependencies.In other words, it’s always the case that every attribute depends on the whole primary key,not just part of it. And so our tables are in Second Normal Form and there is no **partial dependency**.
 
+>Formal definition of **Partial Dependency**:
+>
+>Let $R$ be a relational schema. $X,Y,A$ be the attribute sets over $R$ where
+>
+>$X$: Any Candidate Key
+>
+>$Y$: Proper Subset of Candidate Key
+>
+>$A$: Non prime attribute (not a part of Candidate Key)
+>
+>Then, $Y \rightarrow A$ is a **Partial Dependency**
+
+
 
 Now let’s move on to Third Normal Form.
 
