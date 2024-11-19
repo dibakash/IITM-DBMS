@@ -73,7 +73,7 @@ In a relation if there are attributes $\alpha$ and $\beta$, with tuples $T$ wher
 
 if $T_i[\beta] = T_j[\beta]$
 
-we say $\alpha$ determines (functionally determines) $\beta$ (written as $\alpha \rarr \beta$)
+we say $\alpha$ determines (functionally determines) $\beta$ (written as $\alpha \rightarrow \beta$)
 
 This will be clear when we refer to the table below. $\alpha$ value of 100 will always determine $\beta$ police. So we can say $\alpha \rightarrow  \beta$
 
@@ -92,63 +92,63 @@ There are some rules associated with functional dependency
 
 - **Primary Rules**
 
-  1. **Reflexivity:** if $\beta \subseteq \alpha$ then $\alpha \rarr \beta$.
+  1. **Reflexivity:** if $\beta \subseteq \alpha$ then $\alpha \rightarrow \beta$.
 
      > Example:
      >
      > $lecture \subseteq \{student\_{id}, lecture \}$
      >
-     > $\{ student\_{id}, lecture\} \rarr lecture$
+     > $\{ student\_{id}, lecture\} \rightarrow lecture$
 
-  2. **Augmentation:** if $\alpha \rarr \beta$ then $\gamma\alpha  \rarr \gamma\beta$.
-
-     > Example:
-     >
-     > $student\_{id} \rarr lecture$
-     >
-     > $semester, student\_{id} \rarr semester, lecture$
-
-  3. **transitivity:** if $\alpha \rarr \beta, \beta \rarr \gamma$, then $\alpha  \rarr \gamma$.
+  2. **Augmentation:** if $\alpha \rightarrow \beta$ then $\gamma\alpha  \rightarrow \gamma\beta$.
 
      > Example:
      >
-     > $student\_{id} \rarr lecture$,
+     > $student\_{id} \rightarrow lecture$
      >
-     > $lecture \rarr semester$
+     > $semester, student\_{id} \rightarrow semester, lecture$
+
+  3. **transitivity:** if $\alpha \rightarrow \beta, \beta \rightarrow \gamma$, then $\alpha  \rightarrow \gamma$.
+
+     > Example:
+     >
+     > $student\_{id} \rightarrow lecture$,
+     >
+     > $lecture \rightarrow semester$
      >
      > then,
      >
-     > $student\_{id} \rarr semester$
+     > $student\_{id} \rightarrow semester$
 
 ---
 
 - **Secondary Rules ( Additional derived rules )**
 
-  1.  **Reflexivity:** if $\beta \subseteq \alpha$ then$\alpha \rarr \beta$.
+  1.  **Reflexivity:** if $\beta \subseteq \alpha$ then$\alpha \rightarrow \beta$.
 
       > Example:
       >
       > $ lecture \subseteq \{student\_{id}, lecture \}$
-      > $\{ student\_{id}, lecture\} \rarr lecture$
+      > $\{ student\_{id}, lecture\} \rightarrow lecture$
 
-  2.  **Augmentation:** if$\alpha \rarr \beta$ then$\gamma\alpha  \rarr \gamma\beta$.
+  2.  **Augmentation:** if$\alpha \rightarrow \beta$ then$\gamma\alpha  \rightarrow \gamma\beta$.
 
       > Example:
       >
-      > $ student\_{id} \rarr lecture$
-     >$ semester, student\_{id} \rarr semester, lecture$
+      > $ student\_{id} \rightarrow lecture$
+     >$ semester, student\_{id} \rightarrow semester, lecture$
 
-  3.  **transitivity:** if$\alpha \rarr \beta, \beta \rarr \gamma$, then$\alpha  \rarr \gamma$.
+  3.  **transitivity:** if$\alpha \rightarrow \beta, \beta \rightarrow \gamma$, then$\alpha  \rightarrow \gamma$.
 
            > Example:
            >
-           >$ student\_{id} \rarr lecture$,
+           >$ student\_{id} \rightarrow lecture$,
            >
-           >$ lecture \rarr semester$
+           >$ lecture \rightarrow semester$
            >
            > then,
            >
-           >$ student\_{id} \rarr semester$
+           >$ student\_{id} \rightarrow semester$
 
       First Normal Form (1NF)
 
