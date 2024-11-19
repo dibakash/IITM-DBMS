@@ -19,7 +19,7 @@ By the end of it, we will understand the normal forms from the First Normal Form
 By and large, even a good database design can’t protect
 against bad data.But there are some cases of bad data that a good database design can protect against. These are cases where the data is telling us something that logically cannot possibly be true:One customer with two dates of birth is logically impossible. It’s what we might call a failure of data integrity.
 
-![1732004965237](image/normalizaition/1732004965237.png)
+![1732004965237](image/normalization/1732004965237.png)
 
 The data can’t be trusted because it disagrees with itself.When data disagrees with itself, that’s more than just a problem of bad data.It’s a problem of bad database design.
 
@@ -45,7 +45,7 @@ Data redundancy is simply the repetition of data in the table. Data redundancy l
 
 Let us consider this relation / table showing Suppliers of some machine parts with $ Primary key: (SID, PID) $
 
-![1732007259667](image/normalizaition/1732007259667.png)
+![1732007259667](image/normalization/1732007259667.png)
 
 #### Update Anomaly
 
