@@ -96,31 +96,29 @@ There are some rules associated with functional dependency
 
      > Example:
      >
-     > $lecture \subseteq \{student_-id \ , lecture \}$
+     > $lecture \subseteq \{student_-id, lecture \}$
      >
-     > $lecture \subseteq \{student_id, lecture \}$
-     >
-     > $\{ student_id, lecture\} \rightarrow lecture$
+     > $\{ student_-id, lecture\} \rightarrow lecture$
      >
   2. **Augmentation:** if $\alpha \rightarrow \beta$ then $\gamma\alpha  \rightarrow \gamma\beta$.
 
      > Example:
      >
-     > $student_id \rightarrow lecture$
+     > $student_-id \rightarrow lecture$
      >
-     > $semester, student_id \rightarrow semester, lecture$
+     > $semester, student_-id \rightarrow semester, lecture$
      >
   3. **transitivity:** if $\alpha \rightarrow \beta, \beta \rightarrow \gamma$, then $\alpha  \rightarrow \gamma$.
 
      > Example:
      >
-     > $student_id \rightarrow lecture$,
+     > $student_-id \rightarrow lecture$,
      >
      > $lecture \rightarrow semester$
      >
      > then,
      >
-     > $student_id \rightarrow semester$
+     > $student_-id \rightarrow semester$
      >
 
 ---
