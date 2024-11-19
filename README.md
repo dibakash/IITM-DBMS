@@ -129,7 +129,7 @@ There are some rules associated with functional dependency
       > Example:
       >
       > $ lecture \subseteq \{student\_{id}, lecture \}$
-     >$\{ student\_{id}, lecture\} \rarr lecture$
+      > $\{ student\_{id}, lecture\} \rarr lecture$
 
   2.  **Augmentation:** if$\alpha \rarr \beta$ then$\gamma\alpha  \rarr \gamma\beta$.
 
