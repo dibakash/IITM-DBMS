@@ -25,13 +25,8 @@ The data can’t be trusted because it disagrees with itself.When data disagrees
 
 Specifically, it’s what happens when a database design isn’t properly normalized.So what does normalization mean?
 
-When you normalize a database table,you structure it in such a way that it can't express redundant information.So, for example, in a normalized table, you wouldn’t be able to give Customer 1001 two dates of birth even if you wanted to.Normalized database tables are not only protected from contradictory data, they’re also easier to understand easier to enhance and extend protected from insertion anomalies, update anomalies,and deletion anomalies.
 
-How do we determine whether a table isn’t normalized enough – in other words, how do we determine if there’s a danger that redundant data could creep into the table? Well, it turns out that there are sets of criteria we can use to assess the level of danger. These sets of criteria have names like “first normal form”, “second normal form”, “third normal form”, and so on.
-
-If we discover that a table meets the requirements of the first normal form, that’s a bare minimum safety guarantee. If we further discover that the table meets the requirements of the second normal form, that’s an even greater safety guarantee. And so on.
-
-To understand the normal forms and normalizations in more depth, we have to first understand or rather equip ourselves with certain concepts what causes **data redundancy** and anomaly, functional dependency, closures. Once we are thorough with these keeping in mind the practical implications/usage of these concepts we will not only have a strong foundation but the house will be almost complete.
+To understand the normal forms and normalizations in more depth, we have to first understand or rather equip ourselves with certain concepts what causes **data redundancy** and **anomaly**, **functional** **dependency**, **closures**, **candidate key**, **super key**. Once we are thorough with these keeping in mind the practical implications/usage of these concepts we will not only have a strong foundation but the house will be almost complete.
 
 ## What are the dangers that redundant data could bring to the table?
 
@@ -47,16 +42,18 @@ Let us consider this relation / table showing Suppliers of some machine parts wi
 
 ![1732007259667](image/normalization/1732007259667.png)
 
-#### Update Anomaly
+#### UPDATE ANOMALY
+___
 
 Suppose you want to update the city of supplier $S1$. Because of repetitions of the data $S1$ is available in multiple rows. It might happen that update missed out for one or two or some rows due to some technical/manual/logic issue and we end up with conflicting data. This is called **update Anomaly**
 
-#### Deletion Anomaly
+#### DELETION ANOMALY
+___
 
 Suppose you delete **PID P1**. It will lead to complete loss of data for supplier with **SID S3** . This is called **deletion Anomaly**
 
-#### Insertion Anomaly
-
+#### INSERTION ANOMALY
+___
 Suppose you want to we want to add to the table a new row. We have a supplier **(S5, 45, Chennai, \_ \_ , 100)**. This is not possible as **QID** is required for the primary key. This is called **Insertion Anomaly**
 
 We will see how these are tackled with some more examples while discussing Normal forms.
@@ -176,7 +173,80 @@ $$
 \end{align}
 $$
 
+## Candidate Key and Super Key
 
+### Candidate Key
+A Candidate key is a set of minimal attributes that can uniquely identify a tuple in a relationship. These keys have potential to become a primary key (which uniquely identifies a tuple in the relationship). Thus the name "candidate key". Each candidate key is a super key but the reverse is not true.
+
+Example:
+
+$R(A,B,C,G,H), FD = \lbrace A \rightarrow H, GC \rightarrow A \rbrace$
+
+> Tips: to find candidate keys, first take those attribute that are not in the RHS of the FDs.
+
+$$
+\begin{align}
+
+(BCG)^+ &= (BCG)^+ \\
+        &= (BCGA)^+ \\
+        &= (BCGAH)^+ \\
+        &= (ABCGH)^+ \\
+        \\
+(BC)^+ &= (BC)^+ \\
+       &\not=(ABCGH) \\
+        \\
+(CG)^+ &= (CG)^+ \\
+       &= (CGA)^+ \\
+       &= (CGAH)^+ \\
+       &\not=(ABCGH)
+
+\end{align}
+$$
+
+so, the only candidate key in the above case is $(BCG)$
+
+### Super Key
+A superset of any candidate key is a super key.
+
+So in the above example, after we find the candidate key, we can take any superset of it to arrive at the super key
+
+## Normalization
+Let us look back at the example we have seen before:
+
+![1732004965237](image/normalization/1732004965237.png)
+
+When you normalize a database table,you structure it in such a way that it can't express redundant information.So, for example, in a normalized table, you wouldn’t be able to give Customer 1001 two dates of birth even if you wanted to.Normalized database tables are not only protected from contradictory data, they’re also easier to understand easier to enhance and extend protected from insertion anomalies, update anomalies,and deletion anomalies.
+
+How do we determine whether a table isn’t normalized enough – in other words, how do we determine if there’s a danger that redundant data could creep into the table? Well, it turns out that there are sets of criteria we can use to assess the level of danger. These sets of criteria have names like “first normal form”, “second normal form”, “third normal form”, and so on.
+
+If we discover that a table meets the requirements of the first normal form, that’s a bare minimum safety guarantee. If we further discover that the table meets the requirements of the second normal form, that’s an even greater safety guarantee. And so on. Meeting each normal form provides a higher guarantee against data redundancy and anomaly.
+
+We have previously learnt that
+> $DEPENDENCY$ leads to $REDUNDANCY$
+>
+> $REDUNDANCY$ leads to $ANOMALY$
+
+$NORMALIZATION$ or $Schema Refinement$ is a technique of organizing the data in the database. This is done through a systematic approach of decomposing (Good Decomposition) Tables to eliminate data Redundancy and anomaly.
+
+So,
+> $NORMALIZATION$ is achieved through $GOOD\space  DECOMPOSITION$
+>
+> $GOOD\space DECOMPOSITION$ minimizes $DEPENDENCY$
+>
+> Minimized $DEPENDENCY$ leads to minimizing $REDUNDANCY$
+>
+> Minimized $REDUNDANCY$ leads to minimizing $ANOMALY$
+
+
+
+Most common technique for normalization is decomposition. Keep in mind that not all decomposition is "Good Decomposition"
+
+### Good Decomposition
+
+A decomposition of a table or relation is said to good decomposition if it is :
+
+1. Lossless join Decomposition
+2. Dependency Preserving
 
 
 First Normal Form (1NF)
