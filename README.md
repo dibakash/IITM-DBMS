@@ -75,7 +75,7 @@ if $T_i[\beta] = T_j[\beta]$
 
 we say $\alpha$ determines (functionally determines) $\beta$ (written as $\alpha \rarr \beta$)
 
-This will be clear when we refer to the table below. $\alpha$ value of 100 will always determine $\beta$ police. So we can say $\alpha \rarr \beta$
+This will be clear when we refer to the table below. $\alpha$ value of 100 will always determine $\beta$ police. So we can say $\alpha\ \rarr\ \beta$
 
 |       | $\alpha$ |   $\beta$   |
 | :---: | :------: | :---------: |
