@@ -267,8 +267,8 @@ Example:
 ```mermaid
 flowchart TB
    R["R( A, B ,C), FD"]
-   R1["R<sub>1</sub>( A, B), F<sub>1</sub>"]
-   R2["R<sub>2</sub>( B, C), F<sub>2</sub>"]
+   R1["R<sub>1</sub>(A, B),F<sub>1</sub>"]
+   R2["R<sub>2</sub>(B, C),F<sub>2</sub>"]
 
    subgraph "."
    F["F = { A->B, B->C, C->A }"]
