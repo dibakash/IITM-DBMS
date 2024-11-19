@@ -262,12 +262,27 @@ Suppose there's a functional dependency set $FD$ for the relation $R$ and $F_1$ 
 
 - $F^+ \subseteq (F_1 \bigcup F_2)^+$
 
-```mermaid
-flowchart TD
-   A --> B
-   A --> C
+Example:
 
+```mermaid
+flowchart TB
+   R["R( A, B ,C), FD"]
+   R1["R<sub>1</sub>( A, B), F<sub>1</sub>"]
+   R2["R<sub>2</sub>( B, C), F<sub>2</sub>"]
+
+   subgraph "."
+   F["F = { A->B, B->C, C->A }"]
+   F1["F<sub>1</sub> = { A->B, B->A }"]
+   F2["F<sub>2</sub> = { B->C, C->B }"]
+   end
+
+   subgraph " "
+   R --> R1
+   R --> R2
+   end
 ```
+
+
 First Normal Form (1NF)
 
 So let’s begin at the beginning, with First Normal Form.Suppose you and I are both confronted by this question:“Who were the members of the Beatles?” You might answer “John, Paul, George, and Ringo”.I might answer “Paul, John, Ringo, and George”. Of course, my answer and your answer are equivalent, despite having the names in a different order.When it comes to relational databases, the same principle applies. Let’s record the names of theBeatles in a table, and then let’s ask the database to return those names back to us.The results will get returned to us in an arbitrary order. For example, they might get returned like this. Or like this.Or in any other order. There is no “right” order. Are there ever situations where there’s a right order? Suppose we write down the members of the Beatles from tallest to shortest,like this. We title our list “Members Of The Beatles From Tallest To Shortest”.In this list, it’s not just the names that convey meaning. The order of the names conveys meaning too. Paul is the tallest, John is the second-tallest, and so on. Lists like this are totally comprehensible to us – but they’re not normalized. Remember, there’s no such thing as roworder within a relational database table. So here we have our first violation of First Normal Form.When we use row order to convey information, we’re violating First Normal Form.The solution is very simple. Be explicit – if we want to capture height information, we should devote a separate column to it – like this. Or even better, like this.So far, we’ve seen one way in which a design can fail to achieveFirst Normal Form. But there are others. A second way of violating First Normal Form Involves mixing data types. Suppose our Beatle_Height dataset looked like this.If you’re accustomed to spreadsheets, you’ll be aware that they typically won’t stop you from having more than one data type within a single column – for example, they won’t stop you from storing both numbers and strings in a column. But in a relational database, you’re not allowed to be cagey or ambiguous about a column’s data type. The values that go in the Height_In_Cm column can't be a mix of integers and strings. Once you define Height_In_Cm as being an integer column,then every value that goes into that column will be an integer – no strings, no timestamps,no data types of any kind other than integers. So: mixing data types within a column is a violation of First Normal Form, and in fact the database platform won’t even let you do it.A third way of violating First Normal Form is by designing a table without a primary key. A primary key is a column, or combination of columns, that uniquely identifies a row in the table.For example, in the table Beatle_Height, our intention is that each row should tellus about one particular Beatle, so we ought to designate “Beatle” as the primary key of theBeatle_Height table. The database platform will need to know about our choice of primary key,so we’ll want to get the primary key into the database by doing something like this.With the primary key in place, the database platform will prevent multiple rows for the same Beatle from ever being inserted. That’s a good thing,because multiple rows for the same Beatle would be nonsensical, and perhaps contradictory.Obviously, a Beatle can’t have two different heights at once.Every table we design should have a primary key. If it doesn’t, it’s not in First Normal Form.The last way of failing to achieve First Normal Form involves the notion of“repeating groups”. Suppose we’re designing a database for an online multiplayer game.At a given time, each player has a number of items of different types, like arrows,shields, and copper coins. We might represent the situation like this.A player’s inventory is what we call a “repeating group”. Each inventory contains potentially many different types of items: arrows, shields, copper coins, and so on; and in fact there may be hundreds of different types of items that a player might have in their inventory.We could design a database table that represents the Inventory as a string of text:But this is a terrible design because there’s no easy way of querying it.For example, if we want to know which players currently have more than 10 copper coins,then having the inventory data lumped together in a text string will make it very impractical to write a query that gives us the answer.We might be tempted to represent the data like this.This lets us record up to 4 items per inventory. But given that a player can have an inventory consisting of hundreds of different types of items, how practical is it going to be to design a table with hundreds of columns? Even if we were to go ahead and create a super-wide table to hold all possible inventory data, querying it would still be extremely awkward.The bottom line is that storing a repeating group of data items on a single row violates FirstNormal Form. So what sort of alternative design would respect First Normal Form?It would be this. To communicate the fact that rev 73 owns 3 shields, we have a row for Player “trev73”, Item_Type “shields”, Item_Quantity 3.To communicate the fact that trev73 also owns 5 arrows,we have a row for Player “trev73”, Item_Type “arrows”, Item_Quantity 5. And so on.And because each row in the table tells us about one unique combination of Playerand Item_Type, the primary key is the combination of Player and Item_Type.So let’s review what we know about First Normal Form.1. Using row order to convey information is not permitted2. mixing data types within the same column is not permitted3. Having a table without a primary key is not permitted4. repeating groups are not permitted Next up: Second Normal Form. Second Normal Form (2NF)
