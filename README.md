@@ -171,8 +171,8 @@ Let's compute the closure set $(AC)^+$
 $$
 \begin{align}
 (AC)^+ &= (AC)^+ \\
-       &= (ACH)^+ \\
-       &= (ACHB)^+ \\
+       &= (ACH)^+ \cdots since\space A \rightarrow H \\
+       &= (ACHB)^+ \cdots since\space CH \rightarrow B  \\
 \end{align}
 $$
 
