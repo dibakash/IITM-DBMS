@@ -418,7 +418,7 @@ A Player table will contain one row per Player,and in it we can include as colum
 
 ![1732045676477](image/README/1732045676477.png)
 
-For both tables, we can say that there are no part-key dependencies.In other words, it’s always the case that every attribute depends on the whole primary key,not just part of it. And so our tables are in Second Normal Form.
+For both tables, we can say that there are no part-key dependencies.In other words, it’s always the case that every attribute depends on the whole primary key,not just part of it. And so our tables are in Second Normal Form and there is no **partial dependency**.
 
 
 Now let’s move on to Third Normal Form.
