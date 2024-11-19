@@ -43,13 +43,13 @@ Data redundancy is simply the repetition of data in the table. Data redundancy l
 - Deletion Anomaly
 - Update Anomaly
 
-Let us consider this relation / table showing Suppliers of some machine parts with $ Primary key: (SID, PID) $
+Let us consider this relation / table showing Suppliers of some machine parts with $Primary key: (SID, PID)$
 
 ![1732007259667](image/normalization/1732007259667.png)
 
 #### Update Anomaly
 
-Suppose you want to update the city of supplier $ S1 $. Because of repetitions of the data $S1$ is available in multiple rows. It might happen that update missed out for one or two or some rows due to some technical/manual/logic issue and we end up with conflicting data. This is called **update Anomaly**
+Suppose you want to update the city of supplier $S1$. Because of repetitions of the data $S1$ is available in multiple rows. It might happen that update missed out for one or two or some rows due to some technical/manual/logic issue and we end up with conflicting data. This is called **update Anomaly**
 
 #### Deletion Anomaly
 
@@ -73,7 +73,7 @@ In a relation if there are attributes $\alpha$ and $\beta$, with tuples $T$ wher
 
 if $T_i[\beta] = T_j[\beta]$
 
-we say $\alpha$ determines (functionally determines) $\beta$ (written as $ \alpha \rarr \beta $)
+we say $\alpha$ determines (functionally determines) $\beta$ (written as $\alpha \rarr \beta$)
 
 This will be clear when we refer to the table below. $\alpha$ value of 100 will always determine $\beta$ police. So we can say $\alpha \rarr \beta$
 
@@ -96,27 +96,26 @@ There are some rules associated with functional dependency
 
      > Example:
      >
-     > $ lecture \subseteq \{student\_{id}, lecture \}$
+     > $lecture \subseteq \{student\_{id}, lecture \}$
      > $\{ student\_{id}, lecture\} \rarr lecture $
 
   2. **Augmentation:** if $\alpha \rarr \beta $ then $\gamma\alpha  \rarr \gamma\beta$.
 
      > Example:
      >
-     > $ student\_{id} \rarr lecture $
-     > $ semester, student\_{id} \rarr semester, lecture $
+     > $student\_{id} \rarr lecture$ > $semester, student\_{id} \rarr semester, lecture$
 
   3. **transitivity:** if $\alpha \rarr \beta, \beta \rarr \gamma$, then $\alpha  \rarr \gamma$.
 
      > Example:
      >
-     > $ student\_{id} \rarr lecture $,
+     > $student\_{id} \rarr lecture$,
      >
-     > $ lecture \rarr semester $
+     > $lecture \rarr semester$
      >
      > then,
      >
-     > $ student\_{id} \rarr semester $
+     > $student\_{id} \rarr semester $
 
 ---
 
