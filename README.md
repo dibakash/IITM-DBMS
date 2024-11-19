@@ -281,6 +281,29 @@ flowchart TB
    R --> R2
    end
 ```
+Let's check if the above decomposition is lossless
+> $R_1 \bigcup R_2 = R$,
+>
+> $R_1 \bigcap R_2 \not= \phi$
+>
+> $R_1 \bigcap R_2 = B$ which is a key either $R_1$ or $R_2$
+
+So the decomposition is lossless
+
+Now let's check if the decomposition is dependency preserving
+
+> $F =\lbrace A\rightarrow B, B\rightarrow C, C\rightarrow A \rbrace, F^+ = (ABC)^+$
+>
+> $F_1=\lbrace A\rightarrow B, B\rightarrow A\rbrace, F_1^+ = (AB)^+$
+>
+> $F_2 =\lbrace B\rightarrow C, C\rightarrow B\rbrace, F_2^+ = (BC)^+$
+>
+>Also, $(F_1 \bigcup F_2) = \lbrace A\rightarrow B, B\rightarrow A, B\rightarrow C, C\rightarrow B, C\rightarrow A \rbrace$ (using rules)
+>
+> $(F_1 \bigcup F_2)^+ = (ABC)^+$, so $F^+ \subseteq (F_1 \bigcup F_2)^+$
+
+So, the decomposition is dependency preserving as well. Hence this particular decomposition is a Good Decomposition.
+
 
 
 First Normal Form (1NF)
