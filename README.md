@@ -226,7 +226,7 @@ We have previously learnt that
 >
 > $REDUNDANCY$ leads to $ANOMALY$
 
-$NORMALIZATION$ or $Schema Refinement$ is a technique of organizing the data in the database. This is done through a systematic approach of decomposing (Good Decomposition) Tables to eliminate data Redundancy and anomaly.
+$NORMALIZATION$ or $Schema\space Refinement$ is a technique of organizing the data in the database. This is done through a systematic approach of decomposing (Good Decomposition) Tables to eliminate data Redundancy and anomaly.
 
 So,
 > $NORMALIZATION$ is achieved through $GOOD\space  DECOMPOSITION$
