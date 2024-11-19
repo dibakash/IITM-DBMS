@@ -2,13 +2,6 @@
 
 Database Management System
 
-<style>
-table,th,td {
-  border: solid 1px!important;
-  margin:auto;
-}
-</style>
-
 # Database normalization?
 
 What is normalization? Why do we do it? How do we do it? And what bad things can happen if we don’t do it? Let’s explore database normalization from a practical perspective. We’ll keep the jargon to a minimum, and we’ll use lots of examples as we go.
