@@ -96,9 +96,9 @@ There are some rules associated with functional dependency
 
      > Example:
      >
-     > $lecture \subseteq \{student_-id, lecture \}$
+     > $lecture \subseteq  \lbrace student_-id, lecture \rbrace$
      >
-     > $\{ student_-id, lecture\} \rightarrow lecture$
+     > $\lbrace student_-id, lecture\rbrace \rightarrow lecture$
      >
   2. **Augmentation:** if $\alpha \rightarrow \beta$ then $\gamma\alpha  \rightarrow \gamma\beta$.
 
@@ -125,34 +125,39 @@ There are some rules associated with functional dependency
 
 - **Secondary Rules ( Additional derived rules )**
 
-  1. **Reflexivity:** if $\beta \subseteq \alpha$ then$\alpha \rightarrow \beta$.
+
+- **Primary Rules**
+
+  1. **Reflexivity:** if $\beta \subseteq \alpha$ then $\alpha \rightarrow \beta$.
 
      > Example:
      >
-     > $ lecture \subseteq \{student\_{id}, lecture \}$
-     > $\{ student\_{id}, lecture\} \rightarrow lecture$
+     > $lecture \subseteq  \lbrace student_-id, lecture \rbrace$
      >
-  2. **Augmentation:** if$\alpha \rightarrow \beta$ then$\gamma\alpha  \rightarrow \gamma\beta$.
+     > $\lbrace student_-id, lecture\rbrace \rightarrow lecture$
+     >
+  2. **Augmentation:** if $\alpha \rightarrow \beta$ then $\gamma\alpha  \rightarrow \gamma\beta$.
 
      > Example:
      >
-     > $ student\_{id} \rightarrow lecture$
+     > $student_-id \rightarrow lecture$
      >
-
-  > $ semester, student\_{id} \rightarrow semester, lecture$
-  >
-
-  3. **transitivity:** if$\alpha \rightarrow \beta, \beta \rightarrow \gamma$, then$\alpha  \rightarrow \gamma$.
+     > $semester, student_-id \rightarrow semester, lecture$
+     >
+  3. **transitivity:** if $\alpha \rightarrow \beta, \beta \rightarrow \gamma$, then $\alpha  \rightarrow \gamma$.
 
      > Example:
      >
-     >$ student\_{id} \rightarrow lecture$,
+     > $student_-id \rightarrow lecture$,
      >
-     >$ lecture \rightarrow semester$
+     > $lecture \rightarrow semester$
      >
      > then,
      >
-     >$ student\_{id} \rightarrow semester$
+     > $student_-id \rightarrow semester$
+     >
+
+---
 
      First Normal Form (1NF)
 
@@ -162,7 +167,7 @@ Let’s look again at our Player Inventory table. This table is fully normalized
 
 We decide to add a new column called Player_Skill_Level.Imagine that in this particular multiplayer game, there’s a nine-point scale for skill level.At one extreme, a player with skill level 1 is an absolute beginner;at the opposite extreme, a player with skill level 9 is as skilful as it’s possible to be.And let’s say that we’ve defined exactly how Player Skill Levels relate to Player Ratings.“Beginner” means a skill level between 1 and 3. “Intermediate” means a skill level between 4 and 6. And “Advanced” means a skill level between 7 and 9.But now that both the Player_Rating and the Player_Skill_Level exist in the Player table,a problem can arise. Let’s say that tomorrow, player gila19’s skill level increases from 3 to 4. If that happens, we’ll update her row in the Player table to reflect this new skill level.By rights, we should also update her Player_Rating to Intermediate – but suppose something goes wrong, and we fail to update the Player_Rating. Now we’ve got a data inconsistency. gila19’sPlayer_Rating says she’s a Beginner, but her Player_Skill_Level implies she’s Intermediate.How did the design allow this happen? Second Normal Form didn’t flag up any problems. There’sno attribute here that depends only partially on the primary key – as a matter of fact,the primary key doesn’t have any parts; it’s just a single attribute. And both Player_Ratingand Player_Skill_Level are dependent on it. But in what way are they dependent on it? Let's Look more closely. Player_Skill_Level is dependent on Player_ID.Player_Rating is dependent on Player ID too, but only indirectly – like this.A dependency of this kind is called a transitive dependency. Player Rating depends on Player SkillLevel which in turn depends on the primary key: Player ID. The problem is located just here – because what Third Normal Form forbids is exactly this type of dependency: the dependency of a non-key attribute on another non-key attribute. Because Player Rating depends on Player SkillLevel – which is a non-key attribute – this table is not in Third Normal Form.There’s a very simple way of repairing the design to get it into Third Normal Form.We remove Player Rating from the Player table; so now the Player table looks like this.And we introduce a new table called Player_Skill_Levels.The Player Skill Levels table tells us everything we need to know about how to translate a player skill level into a player rating. Third Normal Form is the culmination of everything we've covered about database normalization so far. It can be summarized in this way: Everynon-key attribute in a table should depend on the key, the whole key, and nothing but the key.If you commit this to memory, and keep it constantly in mind while you’re designing a database, then 99% of the time you will end up with fully normalized tables.It’s even possible to shorten this guideline slightly by knocking out the phrase“non-key” – giving us the revised guideline: every attribute in a table should depend on the key, the whole key, and nothing but the key. And this new guideline represents a slightly stronger flavor ofThird Normal Form known as Boyce-Codd Normal Form. In practice, the difference between Third NormalForm and Boyce-Codd Normal Form is extremely small, and the chances of you ever encountering a real-life Third Normal Form table that doesn’t meet Boyce-Codd Normal Form are almost zero.Any such table would have to have what we call multiple overlapping candidate keys – which gets us into realms of obscurity and theoretical rigor that are a little bit beyond the scope of this video. So as a practical matter, just follow the guideline that every attribute in a table should depend on the key, the whole key, and nothing but the key, and you can be confident that the table will be in both Third Normal Form and Boyce-Codd Normal Form.In almost all cases, once you’ve normalized a table this far, you’ve fully normalized it. There are some instances where this level of normalization isn’t enough.These rare instances are dealt with by Fourth and Fifth Normal Form.So let’s move on to Fourth Normal Form. We’ll look at an example of a situation where Third Fourth Normal Form (4NF)
 
-Normal Form isn’t quite good enough and something a bit stronger is needed. In our example, there's a website called DesignMyBirdhouse.com – the world’s leading supplier of customized birdhouses.On DesignMyBirdhouse.com, customers can choose from different birdhouse models,and, for the model they’ve selected, they can choose both a custom color and a custom style. Each model has its own range of available colors and styles.One way of capturing this information is to put all the possible combinations in a single table, like this. This table is in Third Normal Form. The primary key consists of all three columns: {Model, Color, Style}. Everything depends on the key,the whole key, and nothing but the key. And yet this table is still vulnerable to problems. Let’s look at the rows for the birdhouse model “Prairie”:The available colors for the “Prairie” birdhouse model are brown and beige.Now suppose DesignMyBirdhouse.com decides to introduce a third available color for the “Prairie” model: green. This will mean we’ll have to add two extra “Prairie” rows to the table:one for green bungalow, and one for green schoolhouse.If by mistake we only add a row for green bungalow, and fail to add the row for green schoolhouse, then we have a data inconsistency. Available colors are supposed to be completely independent of available styles. But our table is saying that a customer can choose green only for the bungalow style, not for the schoolhouse style. That makes no sense.The prairie birdhouse model is available in green, so all its styles should be available in green.Something about the way the table is designed has allowed us to represent an impossible situation.To see what’s gone wrong, let’s have a closer look at the dependencies among Models,Colors, and styles. Can we say that Color has a functional dependency on Model?Actually no, because a specific Model isn’t associated with just one Color.And yet it does feel as though Color has some relationship to Model. How can we express it?We can say that each Model has a specific set of available Colors. This kind of dependency is called a multivalued dependency, and we express it with a double-headed arrow, like this:And it’s equally true that each Model has a specific set of available Styles.What Fourth Normal Form says is that the only kinds of multivalued dependency we’re allowed to have in a table are multivalued dependencies on the key. Model is not the key; so the tableModel_Colors_And_Styles_Available is not in Fourth Normal Form.As always, the fix is to split things out into multiple tables.Now, if DesignMyBirdhouse.com expands the range of Prairie-Model colors to include green, we simply add a row to the Model_Colors_Available table: And no anomalies are possible.We’re now ready for Fifth Normal Form, the last normal form covered in this video. Fifth Normal Form (5NF)
+Normal Form isn’t quite good enough and something a bit stronger is needed. In our example, there's a website called DesignMyBirdhouse.com – the world’s leading supplier of customized birdhouses.On DesignMyBirdhouse.com, customers can choose from different birdhouse models,and, for the model they’ve selected, they can choose both a custom color and a custom style. Each model has its own range of available colors and styles.One way of capturing this information is to put all the possible combinations in a single table, like this. This table is in Third Normal Form. The primary key consists of all three columns: lbraceModel, Color, Stylerbrace. Everything depends on the key,the whole key, and nothing but the key. And yet this table is still vulnerable to problems. Let’s look at the rows for the birdhouse model “Prairie”:The available colors for the “Prairie” birdhouse model are brown and beige.Now suppose DesignMyBirdhouse.com decides to introduce a third available color for the “Prairie” model: green. This will mean we’ll have to add two extra “Prairie” rows to the table:one for green bungalow, and one for green schoolhouse.If by mistake we only add a row for green bungalow, and fail to add the row for green schoolhouse, then we have a data inconsistency. Available colors are supposed to be completely independent of available styles. But our table is saying that a customer can choose green only for the bungalow style, not for the schoolhouse style. That makes no sense.The prairie birdhouse model is available in green, so all its styles should be available in green.Something about the way the table is designed has allowed us to represent an impossible situation.To see what’s gone wrong, let’s have a closer look at the dependencies among Models,Colors, and styles. Can we say that Color has a functional dependency on Model?Actually no, because a specific Model isn’t associated with just one Color.And yet it does feel as though Color has some relationship to Model. How can we express it?We can say that each Model has a specific set of available Colors. This kind of dependency is called a multivalued dependency, and we express it with a double-headed arrow, like this:And it’s equally true that each Model has a specific set of available Styles.What Fourth Normal Form says is that the only kinds of multivalued dependency we’re allowed to have in a table are multivalued dependencies on the key. Model is not the key; so the tableModel_Colors_And_Styles_Available is not in Fourth Normal Form.As always, the fix is to split things out into multiple tables.Now, if DesignMyBirdhouse.com expands the range of Prairie-Model colors to include green, we simply add a row to the Model_Colors_Available table: And no anomalies are possible.We’re now ready for Fifth Normal Form, the last normal form covered in this video. Fifth Normal Form (5NF)
 
 For our Fifth Normal Form example, we imagine that there are three different brands of ice cream available: Frosty’s, Alpine, and Ice Queen. Each of the three brands of ice cream offers a different range of flavors: Frosty’s offers vanilla, chocolate,strawberry, and mint chocolate chip Alpine offers vanilla and rum raisinIce Queen offers vanilla, strawberry, and mint chocolate chipNow we ask our friend Jason what types of ice cream he likes.Jason says: I only like vanilla and chocolate. And I only like the brands Frosty and Alpine.We ask our other friend, Suzy, what types of ice cream she likes. Suzy says: I only like rum raisin, mint chocolate chip, and strawberry. And I only like the brands Alpine and Ice Queen.So, after a little bit of brainwork, we deduce exactly which ice cream productsJason and Suzy are willing to eat; and we express this in a table:But time passes, tastes change, and at some point Suzy announces that she now likes Frosty’s brandice cream too. So we need to update our table. It won’t come as any surprise that we might get this update wrong. We might successfully add a row for Person Suzy – Brand Frosty’s – FlavorStrawberry, but fail to add a row for Person Suzy – Brand Frosty’s – Flavor Mint Chocolate Chip.And this outcome wouldn’t just be wrong – it would be logically inconsistent – because we've already established that Suzy likes Frosty’s brand, and likes Mint Chocolate Chip flavor,and therefore there’s no way she can dislike Frosty’s Mint Chocolate Chip.In this example, we went wrong right at the beginning. At the beginning, we were given three pieces of information. First, we were told which brands offered which flavors. Second, we were told which people liked which brands. Third, we were told which people liked which flavors.From those three pieces of information, we should have simply created three tables.And that’s all we needed to do. All the facts of the situation have been represented.If we ever want to know what specific products everyone likes,we can simply ask the database platform, expressing our question in the form of apiece of SQL that logically deduces the answer by joining the tables together.To sum things up: if we want to ensure that a table that’s in Fourth NormalForm is also in Fifth Normal Form, we need to ask ourselves whether the table can be logically thought of as being the result of joining some other tables together.If it can be thought of that way, then it’s not in Fifth Normal Form.If it can’t be thought of that way, then it is in Fifth Normal Form. Summary and review
 
