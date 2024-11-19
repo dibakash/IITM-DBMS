@@ -96,7 +96,7 @@ There are some rules associated with functional dependency
 
      > Example:
      >
-     > $lecture \subseteq \{student \text{\_id}, lecture \}$
+     > $lecture \subseteq \{student\_id, lecture \}$
      >
      > $lecture \subseteq \{student_id, lecture \}$
      >
